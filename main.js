@@ -58,3 +58,33 @@ function preset2() {
 	document.getElementById("bottomright").checked = true;
 	document.getElementById("minNeighbors").value = 1;
 }
+
+function preset3() {
+	document.getElementById("size").value = 200;
+	document.getElementById("colors").value = 15;
+	document.getElementById("interval").value = 100;
+	document.getElementById("topleft").checked = false;
+	document.getElementById("above").checked = true;
+	document.getElementById("topright").checked = false;
+	document.getElementById("left").checked = true;
+	document.getElementById("right").checked = true;
+	document.getElementById("bottomleft").checked = false;
+	document.getElementById("bottom").checked = true;
+	document.getElementById("bottomright").checked = false;
+	document.getElementById("minNeighbors").value = 1;
+}
+
+function preset4() {
+	document.getElementById("size").value = 40;
+	document.getElementById("colors").value = 7;
+	document.getElementById("interval").value = 100;
+	document.getElementById("topleft").checked = true;
+	document.getElementById("above").checked = true;
+	document.getElementById("topright").checked = true;
+	document.getElementById("left").checked = true;
+	document.getElementById("right").checked = true;
+	document.getElementById("bottomleft").checked = true;
+	document.getElementById("bottom").checked = true;
+	document.getElementById("bottomright").checked = true;
+	document.getElementById("minNeighbors").value = 2;
+}
