@@ -13,9 +13,6 @@ window.requestAnimFrame = (function () {
 function GameEngine(size, numColors, interval, topleft,
 		above, topright, left, right, bottomleft, bottom, bottomright, minNeighbors) {
     this.ctx = null;
-	this.click = null;
-    this.mouse = null;
-    this.wheel = null;
     this.surfaceWidth = null;
     this.surfaceHeight = null;
 	this.deleted = null;
@@ -36,7 +33,7 @@ function GameEngine(size, numColors, interval, topleft,
 	this.bottom = bottom;
 	this.bottomright = bottomright;
 	this.minNeighbors = minNeighbors;
-	console.log(this.topleft + " " + this.above + " " + this.topright + " " + this.left + " " + this.right + " " + this.bottomleft + " " + this.bottom + " " + this.bottomright);
+	//console.log(this.topleft + " " + this.above + " " + this.topright + " " + this.left + " " + this.right + " " + this.bottomleft + " " + this.bottom + " " + this.bottomright);
 }
 
 GameEngine.prototype.init = function (ctx) {
@@ -48,12 +45,6 @@ GameEngine.prototype.init = function (ctx) {
 
 GameEngine.prototype.start = function () {
     //console.log("starting game");
-	for(var i = 0; i < this.size * this.size; i++) {
-		var color = Math.floor(Math.random() * this.numColors);
-		//console.log(color);
-		this.cells[i] = color;
-		this.newCells[i] = color;
-	}
     var that = this;
 	var j = 0;
 	function animation_loop() {
@@ -65,6 +56,14 @@ GameEngine.prototype.start = function () {
 	animation_loop();
 }
 
+GameEngine.prototype.populate = function () {
+	for(var i = 0; i < this.size * this.size; i++) {
+		var color = Math.floor(Math.random() * this.numColors);
+		//console.log(color);
+		this.cells[i] = color;
+		this.newCells[i] = color;
+	}
+}
 
 GameEngine.prototype.draw = function () {
     this.ctx.clearRect(0, 0, this.surfaceWidth, this.surfaceHeight);

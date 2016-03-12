@@ -1,5 +1,6 @@
 var gameEngine = new GameEngine();
-
+//console.log(gameEngine);
+var socket = io.connect("http://76.28.150.193:8888");
 function start() {
 	gameEngine.deleted = true;
 	var size = document.getElementById("size").value;
@@ -16,12 +17,13 @@ function start() {
 	var minNeighbors = document.getElementById("minNeighbors").value;
 	gameEngine = new GameEngine(size, numColors, interval, topleft,
 		above, topright, left, right, bottomleft, bottom, bottomright, minNeighbors);
-	console.log(size + "" + numColors + "" + interval + "" + topleft + "" + 
-	above + "" + topright + "" + left + "" + right + "" + bottomleft + "" + bottom + "" + bottomright + "" + minNeighbors);
+	//console.log(size + "" + numColors + "" + interval + "" + topleft + "" + 
+	//above + "" + topright + "" + left + "" + right + "" + bottomleft + "" + bottom + "" + bottomright + "" + minNeighbors);
 	var canvas = document.getElementById("gameWorld");
     var ctx = canvas.getContext("2d");
 	canvas.focus();
     gameEngine.init(ctx);
+	gameEngine.populate();
     gameEngine.start();
 }
 function pause() {
@@ -87,4 +89,26 @@ function preset4() {
 	document.getElementById("bottom").checked = true;
 	document.getElementById("bottomright").checked = true;
 	document.getElementById("minNeighbors").value = 2;
+}
+
+function save() {
+	console.log("Saved: " + gameEngine);
+	socket.emit("save", { studentname: "Sam Vecht", statename: document.getElementById("name").value, data: gameEngine });
+}
+
+socket.on("load", function (data) {
+    console.log("Loaded: " + data.data);
+	gameEngine.deleted = true;
+	gameEngine = Object.assign(new GameEngine(), data.data);	
+	
+	var canvas = document.getElementById("gameWorld");
+    var ctx = canvas.getContext("2d");
+	canvas.focus();
+    gameEngine.init(ctx);
+    gameEngine.start();
+	gameEngine.draw();
+});
+
+function load() {
+	socket.emit("load", { studentname: "Sam Vecht", statename: document.getElementById("name").value });
 }

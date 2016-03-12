@@ -4,6 +4,7 @@
 <head>
     <meta charset="utf-8">
     <title>COLORS</title>
+	<script type="text/javascript" src="http://76.28.150.193:8888/socket.io/socket.io.js"></script>
     <script src="./gameengine.js"></script>
     <script src="./main.js"></script>
 </head>
@@ -20,7 +21,7 @@
 	<br />
 	<text>NumColors(2-15)</text> <input type="text" id="colors" value="15" />
 	<br />
-	<text>Interval between generations(100+)</text> <input type="text" id="interval" value="100" />
+	<text>Interval between generations(ms)(100+)</text> <input type="text" id="interval" value="100" />
 	<br />
 	<text>Directions to check neighbors of</text>
 	<br />
@@ -35,7 +36,7 @@
 	<input type="checkbox" id="bottom" checked>Bottom</input>
 	<input type="checkbox" id="bottomright">Bottom Right</input>
 	<br />
-	<text>Min number of adjacent neighbors in the right color required to change a cell</text> <input type="text" id="minNeighbors" value="1" />
+	<text>Min number of adjacent neighbors in the right color required to change a cell(1-2)</text> <input type="text" id="minNeighbors" value="1" />
 	<br />
 	<button onclick="start()">Start Simulation</button>
 	<br />
@@ -44,6 +45,14 @@
 	<button onclick="preset2()">Trippy</button>
 	<button onclick="preset3()">Default</button>
 	<button onclick="preset4()">Small</button>
+	<br />
+	<br />
+	<h3>Save and load from server</h3>
+	<text>Name: </text>
+	<input type = "text" id = "name" />
+	<br />
+	<button onclick="save()">Save currently running animation as *name*</button>
+	<button onclick="load()">Load *name* from server</button>
 	<p>Inspired by this <a href="https://en.wikipedia.org/wiki/Cyclic_cellular_automaton">wikipedia page</a> especially the last two images on the right side of the screen.</p>
 </body>
 </html>
